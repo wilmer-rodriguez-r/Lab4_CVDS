@@ -8,10 +8,11 @@ public class PowerScore implements GameScore{
     }
 
     /***
-     * @pre
-     * @pos
-     * @param
-     * @return score, de tipo int
+     * @pre gameScore > 0 && correctCount > 0 && incorrectCount > 0
+     * @pos gameScore > 0 && gameScore < 500
+     * @param correctCount number of corrects letters the player has guessed
+     * @param incorrectCount number of incorrect letters the player has guessed
+     * @return score type int
      */
     public int calculateScore(int correctCount, int incorrectCount) {
         if (correctCount > gameModel.getCorrectCount()) {
