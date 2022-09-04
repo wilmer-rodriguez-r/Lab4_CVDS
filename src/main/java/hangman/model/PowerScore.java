@@ -2,9 +2,9 @@ package hangman.model;
 
 public class PowerScore implements GameScore{
 
-    private GameModel gameModel;
-    public PowerScore(GameModel gameModel) {
-        this.gameModel = gameModel;
+    private int score;
+    public PowerScore() {
+        score = 0;
     }
 
     /***
@@ -14,13 +14,28 @@ public class PowerScore implements GameScore{
      * @param incorrectCount number of incorrect letters the player has guessed
      * @return score type int
      */
-    public int calculateScore(int correctCount, int incorrectCount) {
+    public int calculateScore(int correctCount, int incorrectCount, GameModel gameModel) {
         if (correctCount > gameModel.getCorrectCount()) {
             int pow = (int) Math.pow(5, Math.abs(correctCount - gameModel.getCorrectCount()));
-            gameModel.setScore(Math.min(pow + gameModel.getScore(), 500));
-        } else if (incorrectCount > gameModel.getIncorrectCount() && gameModel.getScore() != 0) {
-            gameModel.setScore(gameModel.getScore() - 8);
+            score = Math.min(pow + gameModel.getScore(), 500);
+        } else if (incorrectCount > gameModel.getIncorrectCount() && gameModel.getScore() >= 8) {
+            score = gameModel.getScore() - 8;
         }
-        return gameModel.getScore();
+        return score;
+    }
+
+    @Override
+    public int getScore() {
+        return score;
+    }
+
+    @Override
+    public void reset() {
+        score = 0;
+    }
+
+    @Override
+    public void setScore(int newScore) {
+        score = newScore;
     }
 }

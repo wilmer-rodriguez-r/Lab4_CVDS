@@ -2,9 +2,9 @@ package hangman.model;
 
 public class BonusScore implements GameScore{
 
-    private GameModel gameModel;
-    public BonusScore(GameModel gameModel) {
-        this.gameModel = gameModel;
+    private int score;
+    public BonusScore() {
+        score = 0;
     }
     /***
      * @pre gameScore > 0 && correctCount > 0 && incorrectCount > 0
@@ -13,12 +13,27 @@ public class BonusScore implements GameScore{
      * @param incorrectCount number of incorrect letters the player has guessed
      * @return score type int
      */
-    public int calculateScore(int correctCount, int incorrectCount) {
+    public int calculateScore(int correctCount, int incorrectCount, GameModel gameModel) {
         if (correctCount > gameModel.getCorrectCount()) {
-            gameModel.setScore(gameModel.getScore() + 10);
-        } else if (incorrectCount > gameModel.getIncorrectCount() && gameModel.getScore() != 0) {
-            gameModel.setScore(gameModel.getScore() - 5);
+            score = gameModel.getScore() + 10;
+        } else if (incorrectCount > gameModel.getIncorrectCount() && gameModel.getScore() >= 5) {
+            score = gameModel.getScore() - 5;
         }
         return gameModel.getScore();
+    }
+
+    @Override
+    public int getScore() {
+        return score;
+    }
+
+    @Override
+    public void reset() {
+        score = 0;
+    }
+
+    @Override
+    public void setScore(int newScore) {
+        score = newScore;
     }
 }

@@ -90,7 +90,7 @@ public class GameController{
             });
         }
 
-        model.setScore(100);
+        model.reset();
                 
         panel.addAncestorListener(new AncestorListener(){
             @Override
