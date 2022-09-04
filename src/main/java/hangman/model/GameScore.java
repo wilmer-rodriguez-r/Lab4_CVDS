@@ -2,5 +2,5 @@ package hangman.model;
 
 public interface GameScore {
 
-    public int calculateScore();
+    public int calculateScore(int correctCount, int incorrectCount);
 }
